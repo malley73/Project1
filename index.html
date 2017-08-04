@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project1</title>
+    <!--Foundation CSS-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+    <!--Custom css-->
+    <link rel="stylesheet" href="assets/css/project1.css">
+</head>
+<style>
+.grid-item {
+    padding: 10px;
+}
+
+.grid {
+    background: #fff;
+}
+
+#groceryButton {
+    background: #4cc355;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px;
+}
+</style>
+
+<body>
+    <!--Modal Reveal-->
+    <div class="reveal" id="imageModal" data-reveal data-animation-in="fade">
+        <!--Element Title-->
+        <h1 class="modalTitle">Title</h1>
+        <!--Image Element-->
+        <img id="recipeImage" src="#" />
+        <p class="lead">
+            <p id="subTitle">Sub title</p>
+            <div id="instructions">Instructions</div>
+            <div id="ingredientList">Ingredient List</div>
+            <div id="extraInfo">Extra</div>
+            <a href="#" id="addGrocery">Grocery</a>
+            <a href="#" id="saveRecipe">Recipe</a>
+            <button class=" close-button " data-close aria-label="Close modal " type="button ">
+                <span aria-hidden="true ">&times;</span>
+            </button>
+    </div>
+    <!--Masonry-->
+    <div class="grid ">
+        <div class="grid-sizer "></div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x300 " />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x250" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x400" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x350" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x250" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x400" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x550 " />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x500" />
+        </div>
+        <div class="grid-item ">
+            <img data-open="imageModal" src="https://via.placeholder.com/450x300" />
+        </div>
+    </div>
+    <!--jquery JS-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js "></script>
+    <!--Foundation JS-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js "></script>
+    <script src="https://cdn.jsdelivr.net/foundation/6.2.4/js/foundation.reveal.js"></script>
+    <!--Masonry GridPlugin JS-->
+    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js "></script>
+    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js "></script>
+    <script>
+    $(document).foundation();
+
+    var grid = document.querySelector('.grid');
+    var msnry;
+
+    imagesLoaded(grid, function() {
+        // init Isotope after all images have loaded
+        msnry = new Masonry(grid, {
+            itemSelector: '.grid-item',
+            columnWidth: '.grid-sizer',
+            percentPosition: true
+        });
+    });
+    </script>
+</body>
+
+</html>
