@@ -25,30 +25,12 @@
 <!--TABS for list of favorities-->
 
 <div class="row collapse">
-  <div class="medium-3 columns">
-   <!--Class "vertical tabs" stacks the tabs-->
-   <!--data-tabs tells the javascript that this will be a set of tabs-->
-   <!--The "example-tabs" ID will be set to match the id of the tab content-->
-    <ul class="vertical tabs" data-tabs id="favorites-tabs">
-      <!--is-active class indicates the first tab opens by default-->
-      <li class="tabs-title is-active"><a href="#panel1v" aria-selected="true">Favorite 1</a></li>
-      <li class="tabs-title"><a href="#panel2v">Favorite 2</a></li>
-      <li class="tabs-title"><a href="#panel3v">Favorite 3</a></li>
-      <li class="tabs-title"><a href="#panel4v">Favorite 4</a></li>
-      <li class="tabs-title"><a href="#panel5v">Favorite 5</a></li>
-      <li class="tabs-title"><a href="#panel6v">Favorite 6</a></li>
-      <li class="tabs-title"><a href="#panel7v">Favorite 7</a></li>
-      <li class="tabs-title"><a href="#panel8v">Favorite 8</a></li>
-      <li class="tabs-title"><a href="#panel9v">Favorite 9</a></li>
-      <li class="tabs-title"><a href="#panel10v">Favorite 10</a></li>
-    </ul>
-  </div>
+<!--Content area for favorite recipe information-->
   <div class="medium-9 columns">
     <!--tabs-content class, set a style to this class.-->
     <div class="tabs-content" data-tabs-content="favorites-tabs">
       <div class="tabs-panel is-active" id="panel1v">
-        <h3>One</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
+        <h3 id="name1">One</h3><img class="thumbnail" src="assets/images/placeholder.png">
         <p>Your first favorite food item discription displays here!</p>
         <button type="button" class="button">Read more!</button>
         <script>console.log(panel1v);</script>
@@ -88,28 +70,28 @@
         <button type="button" class="button">Read more!</button>
         <script>console.log(panel6v);</script>
       </div>
-      <div class="tabs-panel" id="pane7v">
+      <div class="tabs-panel" id="panel7v">
         <h3>Seven</h3>
         <img class="thumbnail" src="assets/images/placeholder.png">
         <p>Your seventh favorite food item discription displays here!</p>
         <button type="button" class="button">Read more!</button>
         <script>console.log(panel7v);</script>
       </div>
-      <div class="tabs-panel" id="pane8v">
+      <div class="tabs-panel" id="panel8v">
         <h3>Eight</h3>
         <img class="thumbnail" src="assets/images/placeholder.png">
         <p>Your eighth favorite food item discription displays here!</p>
         <button type="button" class="button">Read more!</button>
         <script>console.log(panel8v);</script>
       </div>
-      <div class="tabs-panel" id="pane9v">
+      <div class="tabs-panel" id="panel9v">
         <h3>Nine</h3>
         <img class="thumbnail" src="assets/images/placeholder.png">
         <p>Your nineth favorite food item discription displays here!</p>
         <button type="button" class="button">Read more!</button>
         <script>console.log(panel9v);</script>
       </div>
-      <div class="tabs-panel" id="pane10v">
+      <div class="tabs-panel" id="panel10v">
         <h3>Ten</h3>
         <img class="thumbnail" src="assets/images/placeholder.png">
         <p>Your tenth favorite food item discription displays here!</p>
@@ -118,6 +100,25 @@
       </div>
     </div>
   </div>
+  <div class="medium-3 columns">
+   <!--Class "vertical tabs" stacks the tabs-->
+   <!--data-tabs tells the javascript that this will be a set of tabs-->
+   <!--The "favorites-tabs" ID matches the id of the tab content-->
+    <ul class="vertical tabs" data-tabs id="favorites-tabs">
+      <!--is-active class indicates the first tab opens by default-->
+      <li class="tabs-title is-active"><a href="#panel1v" aria-selected="true">Favorite 1</a></li>
+      <li class="tabs-title"><a href="#panel2v">Favorite 2</a></li>
+      <li class="tabs-title"><a href="#panel3v">Favorite 3</a></li>
+      <li class="tabs-title"><a href="#panel4v">Favorite 4</a></li>
+      <li class="tabs-title"><a href="#panel5v">Favorite 5</a></li>
+      <li class="tabs-title"><a href="#panel6v">Favorite 6</a></li>
+      <li class="tabs-title"><a href="#panel7v">Favorite 7</a></li>
+      <li class="tabs-title"><a href="#panel8v">Favorite 8</a></li>
+      <li class="tabs-title"><a href="#panel9v">Favorite 9</a></li>
+      <li class="tabs-title"><a href="#panel10v">Favorite 10</a></li>
+    </ul>
+  </div>
+
 </div>
     <script type="text/javascript">
     $(document).foundation();

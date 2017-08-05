@@ -1,13 +1,18 @@
 
 #pageTitle {
+  /*background-image: url("../images/food-header-image.png");*/
   background-color: #42D1C7;
+  color: white;
   margin-top: 22px;
   margin-right: 22px;
   padding-left: 12px;
+  padding-top: 50px;
+  padding=bottom: 50px;
 }
 
 .tabs-content {
-  background-color: #42D1C7;
+  background-image: url("../images/food-background3-gray.png");
+  /*background-color: #42D1C7;*/
   margin-left: 22px;
   margin-right: 22px;
 }
