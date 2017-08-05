@@ -16,9 +16,13 @@
   <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
   <div class="title-bar-title">Menu</div>
 </div>
+
 <div class="top-bar" id="responsive-menu">
-	<div class="top-bar-left">   
-		<ul class="dropdown menu" data-dropdown-menu>
+  <div class="top-bar-left">   
+    <ul class="dropdown menu" data-dropdown-menu>
+            <li>
+            <a href="index.html" class="title"><img src="fullStackLogo.png"></a>
+            </li>
             <li>
               <a href="#" class="title">Meal Type</a>
               <ul class="mealtype">
@@ -33,10 +37,10 @@
                 <li><input type="checkbox" value="indian">Indian</li>
                 <li><input type="checkbox" value="italian">Italian</li>
                 <li><input type="checkbox" value="greek">Greek</li>
-				<li><input type="checkbox" value="thai">Thai</li>
-				<li><input type="checkbox" value="mexican">Mexican</li>
-				<li><input type="checkbox" value="korean">Korean</li>
-				<li><input type="checkbox" value="japanese">Japanese</li>
+                <li><input type="checkbox" value="thai">Thai</li>
+                <li><input type="checkbox" value="mexican">Mexican</li>
+                <li><input type="checkbox" value="korean">Korean</li>
+                <li><input type="checkbox" value="japanese">Japanese</li>
               </ul>
             </li> 
             <li>
@@ -48,7 +52,7 @@
                 <li><input type="checkbox" value="milk">Milk</li>
                 <li><input type="checkbox" value="eggs">Eggs</li>
                 <li><input type="checkbox" value="soy">Soy</li>
-                 <li><input type="checkbox" value="wheat&gluten">Wheat & Gluten</li>
+                <li><input type="checkbox" value="wheat&gluten">Wheat & Gluten</li>
               </ul>
             </li>
             <li>
@@ -64,19 +68,15 @@
                 <li><input type="checkbox" value="thewhole30">The Whole30</li>
               </ul>
             </li>
-			<li>
+             <li>
               <a href="#" class="textInput">Keywords</a>
               <ul class="textinput">
-			      <li><input type="search" placeholder="Search"></li>
-			      <li><button type="button" class="button">Search</button></li>
-	          </ul>
-        	</li>
-			<li>
-			<input type="submit" value="Submit">
-			</li>
-			<li><a href="#" value="Favorites">Favorites</a></li>
-        </ul> 
-	</div>
+                <li><input type="search" placeholder="Search"></li>
+                <li><button type="button" class="button">Search</button></li>
+            </li>
+      </ul>
+          <li><input class="submit" type="submit" value="Submit"></li>
+          <li><a href="#" class="favorites" value="Favorites">Favorites</a></li>
 </div>
     <script type="text/javascript">
     $(document).foundation();

@@ -1,3 +1,16 @@
 li{
   list-style: none;
+  margin-left: 5px;
+}
+
+.top-bar-left{
+	margin-left: 20px;
+}
+
+.submit{
+	margin-left: 10px
+}
+
+.favorites{
+	margin-left: 220px;
 }
