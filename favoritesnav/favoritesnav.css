@@ -1,0 +1,32 @@
+.navItem{
+  list-style: none;
+  margin-left: 5px;
+  font-family: gill sans;
+}
+.branding{
+	margin-right: 0px;
+}
+.home{
+	margin-top: 89px;
+	color: #76002e;
+}
+.title{
+	margin-top: 73px;
+}
+#responsive-menu, 
+li{
+	background-color: #ffffff;
+}
+.top-bar-left{
+	margin-left: 20px;
+}
+
+.submit{
+	margin-left: 10px;
+	background-color: #ffffff;
+	border: none;
+}
+
+/*.favorites{
+	margin-left: 220px;
+}*/
