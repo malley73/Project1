@@ -1,6 +1,25 @@
-li{
+.brandimg{
+margin-top: 20px;
+max-width:150px;
+max-height:91px;
+}
+.navItem{
   list-style: none;
   margin-left: 5px;
+  font-family: gill sans;
+}
+a.title,
+a.textInput,
+.submit,
+.favorites
+{
+	margin-top: 65px;
+	color: #76002e;
+}
+#responsive-menu, 
+li{
+	list-style: none;
+	background-color: #ffffff;
 }
 
 .top-bar-left{
@@ -8,9 +27,11 @@ li{
 }
 
 .submit{
-	margin-left: 10px
+	margin-left: 10px;
+	background-color: #ffffff;
+	border: none;
 }
 
 .favorites{
-	margin-left: 220px;
+	margin-left: 89px;
 }
