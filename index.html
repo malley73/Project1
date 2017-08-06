@@ -10,9 +10,76 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
     <!--Custom css-->
     <link rel="stylesheet" href="assets/css/project1.css">
+    <link rel="stylesheet" href="assets/css/nav.css">
 </head>
 
 <body>
+
+<ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
+<li class="navLogo">
+            <a href="index.html" class="logo"><img class="brandimg" src="assets/images/fullStackLogo.png"></a>
+            </li>
+  <li class="navItem">
+    <a href="#" class="title">Meal Type</a>
+    <ul class="vertical menu mealtype">
+          <li class="item"><input type="checkbox">Breakfast</li>
+          <li class="item"><input type="checkbox">Lunch</li>
+          <li class="item"><input type="checkbox">Dinner</li>
+        </ul>
+  </li>
+
+  <li class="navItem">
+    <a href="#" class="title">Food Genre</a>
+    <ul class="vertical menu mealgenre">
+      <li class="item"><input type="checkbox" value="indian">Indian</li>
+      <li class="item"><input type="checkbox" value="italian">Italian</li>
+      <li class="item"><input type="checkbox" value="greek">Greek</li>
+      <li class="item"><input type="checkbox" value="thai">Thai</li>
+      <li class="item"><input type="checkbox" value="mexican">Mexican</li>
+      <li class="item"><input type="checkbox" value="korean">Korean</li>
+      <li class="item"><input type="checkbox" value="japanese">Japanese</li>
+    </ul>
+  </li>
+  <li class="navItem">
+    <a href="#" class="title">Allergans</a>
+    <ul class="vertical menu allergans">
+      <li class="item"><input type="checkbox" value="nuts">Nuts</li>
+      <li class="item"><input type="checkbox" value="fish">Fish</li>
+      <li class="item"><input type="checkbox" value="shelfish">Shelfish</li>
+      <li class="item"><input type="checkbox" value="milk">Milk</li>
+      <li class="item"><input type="checkbox" value="eggs">Eggs</li>
+      <li class="item"><input type="checkbox" value="soy">Soy</li>
+      <li class="item"><input type="checkbox" value="wheat&gluten">Wheat & Gluten</li>
+    </ul>
+  </li>
+   <li class="navItem">
+    <a href="#" class="title">Dietary Needs</a>
+    <ul class="vertical menu dietaryneeds">
+      <li class="item"><input type="checkbox" value="vegetarian"> Vegetarian</li>
+      <li class="item"><input type="checkbox" value="glutenfree">Gluten-Free</li>
+      <li class="item"><input type="checkbox" value="ketogenic">Ketogenic</li>
+      <li class="item"><input type="checkbox" value="lowfodmap">Low FODMAP</li>
+      <li class="item"><input type="checkbox" value="sustainable">Sustainable</li>
+      <li class="item"><input type="checkbox" value="vegan">Vegan</li>
+      <li class="item"><input type="checkbox" value="healthy">Healthy</li>
+      <li class="item"><input type="checkbox" value="thewhole30">The Whole30</li>
+    </ul>
+  </li>
+  <li class="navItem">
+      <a href="#" class="textInput">Keywords</a>
+      <ul class="textinput">
+        <li><input type="search" placeholder="Search"></li>
+        <li><button type="button" class="button">Search</button></li>
+      </ul>
+  </li>
+  <li class="navItem">
+      <input class="submit" type="submit" value="Submit">
+  </li>
+  <li class="navItem">
+      <a href="#" class="favorites" value="Favorites">Favorites</a>
+  </li>
+</ul>
+
     <div class="container">
         <div class="row fullWidth">
             <div class="large-6 columns">

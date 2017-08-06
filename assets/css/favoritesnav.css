@@ -4,22 +4,22 @@
   font-family: gill sans;
 }
 .branding{
-	margin-right: 0px;
-	padding-right: 0px;
+	margin-left: 62px;
 }
 .home{
-	margin-top: 110px;
+	margin-top: 63px;
 	color: #76002e;
 	font-size: 23px;
 }
 .title{
-	margin-top: 95px;
-    margin-left: 50px;
+	margin-top: 4px;
+    margin-left: 86px;
+    font-family: gill sans;
+    font-size: 63px;
+    color: #7c1c2e;
+    font-weight: lighter;
 }
-#responsive-menu, 
-li{
-	background-color: #ffffff;
-}
+
 .top-bar-left{
 	margin-left: 20px;
 }
@@ -30,6 +30,14 @@ li{
 	border: none;
 }
 
-/*.favorites{
-	margin-left: 220px;
-}*/
+@media screen and (max-width: 639px) {
+.home{
+	margin-top: 0px;
+    margin-left: 70px;
+}
+
+.title{
+	margin-top: 0px;
+}
+
+}
