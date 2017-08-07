@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <meta charset="utf-8">
+  <title>Mashape Query</title>
+  <script>
+  //$(document).ready(function() {
+
+  function firebaseInit() {
+    var config = {
+      apiKey: "AIzaSyD3J6w3EM4cTgZC88Wf9HWQvO1sjTNLGwQ",
+      authDomain: "project1-fav-meals.firebaseapp.com",
+      databaseURL: "https://project1-fav-meals.firebaseio.com",
+      projectId: "project1-fav-meals",
+      storageBucket: "",
+      messagingSenderId: "809946328601"
+    };
+    firebase.initializeApp(config);
+
+    var database = firebase.database();
+    return database;
+  }
+
+  //favoritesPage
+  function retrieveFavorite() {
+    database = firebaseInit();
+    database.ref().on("child_added", function(childSnapshot, prevChildKey) {
+      console.log(childSnapshot);
+      parseFavData(childSnapshot);
+    });
+  }
+
+  //favoritesPage
+  function parseFavData() {
+    var id = childSnapshot.val().id;
+    var title = childSnapshot.val().title;
+    var image = childSnapshot.val().image;
+    updateFavList(id, title, image);
+  }
+  //favoritesPage
+  function updateFavList(id, title, image) {
+    $("#favorites-tabs").append("<li class='tabs-title'><a href='#panel' aria-selcted='true' val='" + id + "'>" + title + "</a></li")
+  }
+
+  // function updateDisplay(name, destination, frequency, nextArrival, minutes, status) {
+  //       $("#display > tbody").append("<tr class='danger'><td>" + name + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td>" + minutes + "</td><td>" + status + "</td></tr>");
+  // }
+
+
+  function saveToFavorites() {
+    savid = localStorage.getItem("id");
+    savtitle = localStorage.getItem("title");
+    savimage = localStorage.getItem("image");
+    console.log(savid + " " + savtitle + " " + savimage);
+    database = firebaseInit();
+    console.log(database);
+    var favorite = {
+      id: savid,
+      title: savtitle,
+      image: savimage
+    };
+    database.ref().push(favorite);
+  }
+
+
+  //meal plan url pulls back breakfast, lunch and dinner options in array[0,1,2]
+  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=vegetarian&exclude=shellfish%2C+olives&targetCalories=2000&timeFrame=day',
+  // to call specific recipe by ID 
+  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+recipeID+'/information?includenutrition=false',
+  // for random search from main page (abandoned for now)
+  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=vegetarian%2Cdessert&exclude=dairy' ,// for random search from main page
+
+  function doIt(mealTime) { // meal Time = breakfast[0],  lunch[1], or dinner[2]
+    var output0 = $.ajax({
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=vegetarian&exclude=shellfish%2C+olives&targetCalories=2000&timeFrame=day', //meal plan
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        var mealData = data;
+        document.getElementById("output").innerHTML = data.meals[0].id;
+        var recipeID = String(data.meals[0].id); //array selection from Nav
+        getRecipe(recipeID);
+      },
+      error: function(err) { alert(err); },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-Mashape-Authorization", "68pkFBaIhgmshtyVwc28fl3QMHAUp1br54TjsnIIK2Hllb3GID"); // Enter here your Mashape key
+      }
+    });
+  }
+
+  function getRecipe(recipeID) {
+    var output1 = $.ajax({
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/' + recipeID + '/information?includenutrition=false', // for favorite call
+      type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
+      data: {}, // Additional parameters here
+      dataType: 'json',
+      success: function(data) {
+        console.log(data);
+        prepareOutputToPage(data);
+      },
+      error: function(err) { alert(err); },
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader("X-Mashape-Authorization", "68pkFBaIhgmshtyVwc28fl3QMHAUp1br54TjsnIIK2Hllb3GID");
+      }
+    });
+  }
+
+
+  function prepareOutputToPage(data) {
+    var title = data.title;
+    var image = data.image;
+    var serveTime = data.readyInMinutes;
+    var servings = data.servings;
+    var id = data.id;
+    //local storage for favorites
+    localStorage.setItem("id", id);
+    localStorage.setItem("title", title);
+    localStorage.setItem("image", image);
+    //output strings
+    var miscOut = "<ul><h2>Miscelaneous Information</h2><li>Time to Table: " + serveTime + " minutes</li><li>Serves: " + servings + "</li></ul>";
+    var titleOut = "<h1>" + title + "</h1>";
+    var imageMain = "<img class='recipeImg' src='" + image + "'>";
+    // push to page
+    outputToPage(titleOut, "title");
+    outputToPage(imageMain, "img");
+    outputToPage(miscOut, "misc");
+    // some data needs some 'massaging'
+    var instructions = data.instructions;
+    parseInstructions(instructions);
+    var ingredients = data.extendedIngredients; //this is an array
+    parseIngredients(ingredients);
+  }
+
+  function parseIngredients(ingredients) {
+    var ingOutput = "<h2>Ingredients</h2>";
+    for (i = 0; i < ingredients.length; i++) {
+      var name = ingredients[i].name;
+      var amount = Math.round((ingredients[i].amount) * 100) / 100;;
+      var unit = ingredients[i].unitLong;
+      var imageURL = ingredients[i].image;
+      ingOutput = ingOutput + "<span style='display:block;'><img height='20' width='auto' class='manImg' src='" + imageURL + "'>" + name + " - " + amount + " " + unit + "</img></span>"
+    }
+    outputToPage(ingOutput, "ingredients");
+  }
+
+
+  function parseInstructions(instructions) {
+    console.log(instructions);
+    var instOutput = "";
+    if (instructions.indexOf("<ol>") === -1) { //if not already an ordered list
+      instructions = "<ol><h2>Directions</h2><li> " + instructions + "</li></ol>"; //add begin and end tags
+      var instList = instructions.split(" ");
+      if (instList[1].indexOf("Directions") !== -1) {
+        instList[1] = ""; // Remove "Directions" text
+      }
+      for (i = 0; i < instList.length; i++) {
+        instList[i] = String(instList[i]);
+        instList[i - 1] = String(instList[i - 1]);
+        // remove number from directions "x)"
+        if (instList[i].indexOf(")") !== -1 && isNaN(instList[i].charAt(instList[i].indexOf(")") - 1)) === false) {
+          instList[i] = instList[i].slice(0, instList[i].indexOf(")") - 1) + instList[i].slice(instList[i].indexOf(")") + 1);
+        }
+        //insert <li> elements between any period and capital letter
+        if (i !== 0) {
+          if (instList[i - 1].charAt(instList[i - 1].length - 1) == "." && instList[i].charAt(0) == String(instList[i].charAt(0)).toUpperCase() && instList[i].charAt(0) !== "(") {
+            instList[i] = "</li><li>" + instList[i];
+          }
+        }
+        instOutput = instOutput + String(instList[i] + " ");
+      }
+    } else {
+      instOutput = instructions;
+    }
+    instOutput = instOutput + "<p>Note: Recipes are pulled from a user maintained database. This site is not responsible for grammatical errors or inconsistencies.</p>"
+    console.log(instOutput);
+    outputToPage(instOutput, "instructions");
+  }
+
+  function outputToPage(outputData, divID) {
+    $("#" + divID).html(outputData);
+  }
+
+  //notes for getting data from nav
+
+  //   getElementsByTagName() returns a NodeList, which can be used similar to an array, i.e., with bracket notation. Each element in the NodeList will represent a &lt;ul&gt; element.
+
+  // If you want to access the list items, rather than the list, you should use getElementsByTagName("li").
+
+  // For instance, if you have markup like this,
+
+  // <ul id="foo">
+  //   <li>First</li>
+  //   <li>Second</li>
+  //   <li>Third</li>
+  // </ul>
+
+  // you can access the list items this way,
+
+  // var ul = document.getElementById("foo");
+  // var items = ul.getElementsByTagName("li");
+  // for (var i = 0; i < items.length; ++i) {
+  //   // do something with items[i], which is a <li> element
+  // }
+
+  // function myFunction() {
+  //   var x = document.getElementById("myCheck").checked;
+  //   document.getElementById("demo").innerHTML = x;
+  //   if (x === true) {
+  //     var y = document.getElementById("myCheck").value;
+  //     document.getElementById("demo").innerHTML = y;
+  //   }
+  // }
+
+
+
+  // });
+  </script>
+</head>
+
+<body>
+  <button onclick="doIt()">Run the request</button>
+  <div id="output">The API request is:</div>
+  <div id="title"></div>
+  <div id="img"></div>
+  <div id="instructions"></div>
+  <div id="ingredients"></div>
+  <div id="misc"></div>
+  <button onclick="saveToFavorites()">Save to Favorites</button>
+</body>
+
+</html>
