@@ -1,141 +1,180 @@
 <!doctype html>
 <html class="no-js" lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Full Stack Meals</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.css">
-    <link rel="stylesheet" href="assets/css/styles.css">
-    <link rel="stylesheet" href="assets/css/favoritesnav.css">
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.1/js/foundation.min.js"></script>
-  </head>
+
+<head>
+  <meta charset="utf-8" />
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Favorites - Full Stack Meals</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.4/foundation.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/favoritesnav.css">
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.4.1/js/foundation.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script type="text/javascript" src="assets/javascript/favoritesapp.js"></script>
+</head>
+
 <body>
-
-<div class="container">
-
-<ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
-  <li>
-  <li class="navItem"> 
-    <a href="index.html" class="branding"><img src="assets/images/fullStackLogo.png"></a>
-  </li> 
-  <li class="navItem">
-  <a href="#" class="home" value="Favorites">Home</a>
-  </li>
-</ul>
-<h1 class="title">Favorites</h1>
-
-
-
-<div class="row">
-  <div class="small-6 large-5 columns"><!-- ... --></div>
-  <div class="small-6 large-7 columns"><!-- ... --></div>
-</div>
-
-<!--TABS for list of favorities-->
-
-<div class="row collapse">
-<!--Content area for favorite recipe information-->
-  <div class="medium-9 columns">
-    <!--tabs-content class, set a style to this class.-->
-    <div class="tabs-content" data-tabs-content="favorites-tabs">
-      <div class="tabs-panel is-active" id="panel1v">
-        <h3 id="name1">One</h3><img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your first favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel1v);</script>
+  <div class="container">
+    <ul class="vertical medium-horizontal menu" data-responsive-menu="drilldown medium-dropdown">
+      <li>
+        <li class="navItem">
+          <a href="index.html" class="branding"><img src="assets/images/fullStackLogo.png"></a>
+        </li>
+        <li class="navItem">
+          <a href="index.html" class="home" value="Favorites">Home</a>
+        </li>
+    </ul>
+    <h1 class="title">Favorites</h1>
+    <div class="row">
+      <div class="small-6 large-5 columns">
+        <!-- ... -->
       </div>
-      <div class="tabs-panel" id="panel2v">
-        <h3>Two</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your second favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel2v);</script>
+      <div class="small-6 large-7 columns">
+        <!-- ... -->
       </div>
-      <div class="tabs-panel" id="panel3v">
-        <h3>Three</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your third favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel3v);</script>
+    </div>
+    <!--TABS for list of favorities-->
+    <div class="row collapse">
+      <!--Content area for favorite recipe information-->
+      <div class="medium-9 columns">
+        <!--tabs-content class, set a style to this class.-->
+        <div class="tabs-content" data-tabs-content="favorites-tabs">
+          <div class="tabs-panel is-active" id="panel1v">
+            <div id="recipeID1"></div>
+            <h3 id="name1">One</h3><img id="thumbnail1" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions1">
+              <p>Your first favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList1"></div>
+            <div id="misc1"></div>
+            <button id="btn1" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel2v">
+            <div id="recipeID2"></div>
+            <h3 id="name2">Two</h3>
+            <img id="thumbnail2" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions2">
+              <p>Your second favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList2"></div>
+            <div id="misc2"></div>
+            <button id="btn2" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel3v">
+            <div id="recipeID3"></div>
+            <h3 id="name3">Three</h3>
+            <img id="thumbnail3" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions3">
+              <p>Your second favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList3"></div>
+            <div id="misc3"></div>
+            <button id="btn3" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel4v">
+            <div id="recipeID4"></div>
+            <h3 id="name4">Four</h3>
+            <img id="thumbnail4" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions4">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList4"></div>
+            <div id="misc4"></div>
+            <button id="btn4" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel5v">
+            <div id="recipeID5"></div>
+            <h3 id="name5">Five</h3>
+            <img id="thumbnail5" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions5">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList5"></div>
+            <div id="misc5"></div>
+            <button id="btn5" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel6v">
+            <div id="recipeID6"></div>
+            <h3 id="name6">Six</h3>
+            <img id="thumbnail6" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions6">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList6"></div>
+            <div id="misc6"></div>
+            <button id="btn6" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel7v">
+            <div id="recipeID7"></div>
+            <h3 id="name7">Seven</h3>
+            <img id="thumbnail7" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions7">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList7"></div>
+            <div id="misc7"></div>
+            <button id="btn7" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel8v">
+            <div id="recipeID8"></div>
+            <h3 id="name8">Eight</h3>
+            <img id="thumbnail8" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions8">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList8"></div>
+            <div id="misc8"></div>
+            <button id="btn8" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel9v">
+            <div id="recipeID9"></div>
+            <h3 id="name9">Nine</h3>
+            <img id="thumbnail9" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions9">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList9"></div>
+            <div id="misc9"></div>
+            <button id="btn9" type="button" class="button">Read more!</button>
+          </div>
+          <div class="tabs-panel" id="panel10v">
+            <div id="recipeID10"></div>
+            <h3 id="name10">Ten</h3>
+            <img id="thumbnail10" class="thumbnail" src="assets/images/placeholder.png">
+            <div id="instructions10">
+              <p>Your tenth favorite food item discription displays here!</p>
+            </div>
+            <div id="ingredientList10"></div>
+            <div id="misc10"></div>
+            <button id="btn10" type="button" class="button">Read more!</button>
+          </div>
+        </div>
       </div>
-      <div class="tabs-panel" id="panel4v">
-        <h3>Four</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your fourth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel4v);</script>
-      </div>
-      <div class="tabs-panel" id="panel5v">
-        <h3>Five</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your fifth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel5v);</script>
-      </div>
-      <div class="tabs-panel" id="panel6v">
-        <h3>Six</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your sixth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel6v);</script>
-      </div>
-      <div class="tabs-panel" id="panel7v">
-        <h3>Seven</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your seventh favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel7v);</script>
-      </div>
-      <div class="tabs-panel" id="panel8v">
-        <h3>Eight</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your eighth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel8v);</script>
-      </div>
-      <div class="tabs-panel" id="panel9v">
-        <h3>Nine</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your nineth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel9v);</script>
-      </div>
-      <div class="tabs-panel" id="panel10v">
-        <h3>Ten</h3>
-        <img class="thumbnail" src="assets/images/placeholder.png">
-        <p>Your tenth favorite food item discription displays here!</p>
-        <button type="button" class="button">Read more!</button>
-        <script>console.log(panel10v);</script>
+      <div class="medium-3 columns">
+        <!--Class "vertical tabs" stacks the tabs-->
+        <!--data-tabs tells the javascript that this will be a set of tabs-->
+        <!--The "favorites-tabs" ID matches the id of the tab content-->
+        <ul class="vertical tabs" data-tabs id="favorites-tabs">
+          <!--is-active class indicates the first tab opens by default-->
+          <li class="tabs-title is-active"><a id="title1" href="#panel1v" aria-selected="true">Favorite 1</a></li>
+          <li class="tabs-title"><a id="title2" href="#panel2v">Favorite 2</a></li>
+          <li class="tabs-title"><a id="title3" href="#panel3v">Favorite 3</a></li>
+          <li class="tabs-title"><a id="title4" href="#panel4v">Favorite 4</a></li>
+          <li class="tabs-title"><a id="title5" href="#panel5v">Favorite 5</a></li>
+          <li class="tabs-title"><a id="title6" href="#panel6v">Favorite 6</a></li>
+          <li class="tabs-title"><a id="title7" href="#panel7v">Favorite 7</a></li>
+          <li class="tabs-title"><a id="title8" href="#panel8v">Favorite 8</a></li>
+          <li class="tabs-title"><a id="title9" href="#panel9v">Favorite 9</a></li>
+          <li class="tabs-title"><a id="title10" href="#panel10v">Favorite 10</a></li>
+        </ul>
       </div>
     </div>
   </div>
-  <div class="medium-3 columns">
-   <!--Class "vertical tabs" stacks the tabs-->
-   <!--data-tabs tells the javascript that this will be a set of tabs-->
-   <!--The "favorites-tabs" ID matches the id of the tab content-->
-    <ul class="vertical tabs" data-tabs id="favorites-tabs">
-      <!--is-active class indicates the first tab opens by default-->
-      <li class="tabs-title is-active"><a href="#panel1v" aria-selected="true">Favorite 1</a></li>
-      <li class="tabs-title"><a href="#panel2v">Favorite 2</a></li>
-      <li class="tabs-title"><a href="#panel3v">Favorite 3</a></li>
-      <li class="tabs-title"><a href="#panel4v">Favorite 4</a></li>
-      <li class="tabs-title"><a href="#panel5v">Favorite 5</a></li>
-      <li class="tabs-title"><a href="#panel6v">Favorite 6</a></li>
-      <li class="tabs-title"><a href="#panel7v">Favorite 7</a></li>
-      <li class="tabs-title"><a href="#panel8v">Favorite 8</a></li>
-      <li class="tabs-title"><a href="#panel9v">Favorite 9</a></li>
-      <li class="tabs-title"><a href="#panel10v">Favorite 10</a></li>
-    </ul>
-  </div>
+  <script type="text/javascript">
+  $(document).foundation();
+  </script>
+</body>
 
-</div>
-
-</div>
-
-    <script type="text/javascript">
-    $(document).foundation();
-    </script>
-  </body>
 </html>
