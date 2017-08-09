@@ -1,13 +1,14 @@
-<!DOCTYPE html>
-<html>
+$(document).ready(function() {
+  function emptyDivs() {
+    $("#title").empty();
+    $("#instructions").empty();
+    $("#ingredients").empty();
+    $("#img").empty();
+    $("#misc").empty();
+  }
 
-<head>
-  <script type="text/javascript" src="https://code.jquery.com/jquery.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
-  <meta charset="utf-8">
-  <title>Mashape Query</title>
-  <script>
-  //$(document).ready(function() {
+  // project1.js
+  console.log("this loaded");
 
   function firebaseInit() {
     var config = {
@@ -23,31 +24,6 @@
     var database = firebase.database();
     return database;
   }
-
-  //favoritesPage
-  function retrieveFavorite() {
-    database = firebaseInit();
-    database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-      console.log(childSnapshot);
-      parseFavData(childSnapshot);
-    });
-  }
-
-  //favoritesPage
-  function parseFavData() {
-    var id = childSnapshot.val().id;
-    var title = childSnapshot.val().title;
-    var image = childSnapshot.val().image;
-    updateFavList(id, title, image);
-  }
-  //favoritesPage
-  function updateFavList(id, title, image) {
-    $("#favorites-tabs").append("<li class='tabs-title'><a href='#panel' aria-selcted='true' val='" + id + "'>" + title + "</a></li")
-  }
-
-  // function updateDisplay(name, destination, frequency, nextArrival, minutes, status) {
-  //       $("#display > tbody").append("<tr class='danger'><td>" + name + "</td><td>" + destination + "</td><td>" + frequency + "</td><td>" + nextArrival + "</td><td>" + minutes + "</td><td>" + status + "</td></tr>");
-  // }
 
 
   function saveToFavorites() {
@@ -65,25 +41,82 @@
     database.ref().push(favorite);
   }
 
+  function collectNavData() {
+    console.log("begin collectNavData");
+    var exclusionArray = [];
+    var mealDietArray = [];
+    var childCheckBoxes = $("ul.check ul li input[type='checkbox']");
+    var childRadioSelect = $("ul.check ul li input[type='radio']");
+    var id;
+    console.log(childCheckBoxes);
+    for (i = 0; i < childCheckBoxes.length; i++) {
+      id = childCheckBoxes[i].id;
+      console.log(document.getElementById(id).checked);
+      if (document.getElementById(id).checked === true) {
+        exclusionArray.push(childCheckBoxes[i].id);
+      }
+    }
+    for (i = 0; i < childRadioSelect.length; i++) {
+      id = childRadioSelect[i].id;
+      console.log(document.getElementById(id).checked);
+      if (document.getElementById(id).checked === true) {
+        mealDietArray.push(childRadioSelect[i].id);
+      }
+    }
+    console.log(exclusionArray);
+    console.log(mealDietArray);
+    uncheckAll();
+    parseDataforAPI(exclusionArray, mealDietArray);
+    //var text = $('#menu_selected').text();
+  }
 
-  //meal plan url pulls back breakfast, lunch and dinner options in array[0,1,2]
-  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=vegetarian&exclude=shellfish%2C+olives&targetCalories=2000&timeFrame=day',
-  // to call specific recipe by ID 
-  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/'+recipeID+'/information?includenutrition=false',
-  // for random search from main page (abandon fedor now)
-  // url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/random?limitLicense=false&number=1&tags=vegetarian%2Cdessert&exclude=dairy' ,// for random search from main page
+  function uncheckAll() {
+    var childCheckBoxes = $("ul.check ul li input[type='checkbox']");
+    var childRadioSelect = $("ul.check ul li input[type='radio']");
+    var id;
+    console.log(childCheckBoxes);
+    for (i = 0; i < childCheckBoxes.length; i++) {
+      id = childCheckBoxes[i].id;
+      document.getElementById(id).checked = false;
+    }
+    for (i = 0; i < childRadioSelect.length; i++) {
+      id = childRadioSelect[i].id;
+      document.getElementById(id).checked = false;
+    }
+    document.getElementById("lunch").checked = true;
+  }
 
-  function doIt(mealTime) { // meal Time = breakfast[0],  lunch[1], or dinner[2]
+  function parseDataforAPI(exclusions, mealDiet) {
+    var meal = mealDiet[0];
+    var mealId = 0;
+    switch (meal) {
+      case "dinner":
+        mealId++;
+      case "lunch":
+        mealId++;
+    }
+    var diet = mealDiet[1];
+    var exclusionList = exclusions[0];
+    for (i = 1; i < exclusions.length; i++) {
+      exclusionList = exclusionList + "%2C" + exclusions[i];
+    }
+    if (diet === undefined) { diet = ""; }
+    if (exclusionList === undefined) { exclusionList = ""; }
+    console.log(mealId + " " + diet + " " + exclusionList);
+    getMeals(mealId, diet, exclusionList);
+  }
+
+
+  function getMeals(meal, diet, exclusions) { // meal Time = breakfast[0],  lunch[1], or dinner[2]
     var output0 = $.ajax({
-      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=&exclude=&targetCalories=2000&timeFrame=day', //meal plan
+      url: 'https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/mealplans/generate?diet=' + diet + '&exclude=' +
+        exclusions + '&targetCalories=2000&timeFrame=day', //meal plan
       type: 'GET', // The HTTP Method, can be GET POST PUT DELETE etc
       data: {}, // Additional parameters here
       dataType: 'json',
       success: function(data) {
         console.log(data);
-        var mealData = data;
-        document.getElementById("output").innerHTML = data.meals[2].id;
-        var recipeID = String(data.meals[2].id); //array selection from Nav
+        var recipeID = String(data.meals[meal].id); //array selection from Nav
         getRecipe(recipeID);
       },
       error: function(err) { alert(err); },
@@ -110,7 +143,6 @@
     });
   }
 
-
   function prepareOutputToPage(data) {
     var title = data.title;
     var image = data.image;
@@ -123,12 +155,13 @@
     localStorage.setItem("image", image);
     //output strings
     var miscOut = "<ul><h2>Miscelaneous Information</h2><li>Time to Table: " + serveTime + " minutes</li><li>Serves: " + servings + "</li></ul>";
-    var titleOut = "<h1>" + title + "</h1>";
-    var imageMain = "<img class='recipeImg' height='250' width='auto' src='" + image + "'>";
+    var titleOut = "<h3>" + title + "</h3>";
+    var imageMain = "<img class='recipeImg' height='250' width='auto' src='" + image + "'><br><br>";
     // push to page
     outputToPage(titleOut, "title");
     outputToPage(imageMain, "img");
     outputToPage(miscOut, "misc");
+    enableSaveToFavoritesButton();
     // some data needs some 'massaging'
     var instructions = data.instructions;
     parseInstructions(instructions);
@@ -137,24 +170,23 @@
   }
 
   function parseIngredients(ingredients) {
-    var ingOutput = "<h2>Ingredients</h2>";
+    var imgOutput = "<h2>Ingredients</h2>";
     for (i = 0; i < ingredients.length; i++) {
       var name = ingredients[i].name;
       var amount = Math.round((ingredients[i].amount) * 100) / 100;;
       var unit = ingredients[i].unitLong;
       var imageURL = ingredients[i].image;
-      ingOutput = ingOutput + "<span style='display:block;'><img height='20' width='auto' class='manImg' src='" + imageURL + "'>" + name + " - " + amount + " " + unit + "</img></span>"
+      imgOutput = imgOutput + "<span style='display:block;'><img style='height:30px;' class='manImg' src='" + imageURL + "'>" + name + " - " + amount + " " + unit + "</img></span>"
     }
-    outputToPage(ingOutput, "ingredients");
+    outputToPage(imgOutput, "ingredientList");
   }
-
 
   function parseInstructions(instructions) {
     console.log(instructions);
     var instOutput = "";
     if (instructions != null) {
       if (instructions.indexOf("<ol>") === -1) { //if not already an ordered list
-        instructions = "<ol><h2>Directions</h2><li> " + instructions + "</li></ol>"; //add begin and end tags
+        instructions = "<ol><h4>Directions</h4><li style='display: list-item;'> " + instructions + "</li></ol>"; //add begin and end tags
         var instList = instructions.split(" ");
         if (instList[1].indexOf("Directions") !== -1) {
           instList[1] = ""; // Remove "Directions" text
@@ -169,7 +201,7 @@
           //insert <li> elements between any period and capital letter
           if (i !== 0) {
             if (instList[i - 1].charAt(instList[i - 1].length - 1) == "." && instList[i].charAt(0) == String(instList[i].charAt(0)).toUpperCase() && instList[i].charAt(0) !== "(") {
-              instList[i] = "</li><li>" + instList[i];
+              instList[i] = "</li><li style='display: list-item;'>" + instList[i];
             }
           }
           instOutput = instOutput + String(instList[i] + " ");
@@ -186,55 +218,60 @@
   }
 
   function outputToPage(outputData, divID) {
+    $("#" + divID).empty();
     $("#" + divID).html(outputData);
   }
 
-  //notes for getting data from nav
+  function firebaseInit() {
+    var config = {
+      apiKey: "AIzaSyD3J6w3EM4cTgZC88Wf9HWQvO1sjTNLGwQ",
+      authDomain: "project1-fav-meals.firebaseapp.com",
+      databaseURL: "https://project1-fav-meals.firebaseio.com",
+      projectId: "project1-fav-meals",
+      storageBucket: "",
+      messagingSenderId: "809946328601"
+    };
+    firebase.initializeApp(config);
 
-  //   getElementsByTagName() returns a NodeList, which can be used similar to an array, i.e., with bracket notation. Each element in the NodeList will represent a &lt;ul&gt; element.
+    var database = firebase.database();
+    return database;
+  }
 
-  // If you want to access the list items, rather than the list, you should use getElementsByTagName("li").
+  function saveToFavorites() {
+    var database = firebaseInit();
+    savid = localStorage.getItem("id");
+    savtitle = localStorage.getItem("title");
+    savimage = localStorage.getItem("image");
+    console.log(savid + " " + savtitle + " " + savimage);
+    console.log(database);
+    var favorite = {
+      id: savid,
+      title: savtitle,
+      image: savimage
+    };
+    database.ref().push(favorite);
+  }
 
-  // For instance, if you have markup like this,
-
-  // <ul id="foo">
-  //   <li>First</li>
-  //   <li>Second</li>
-  //   <li>Third</li>
-  // </ul>
-
-  // you can access the list items this way,
-
-  // var ul = document.getElementById("foo");
-  // var items = ul.getElementsByTagName("li");
-  // for (var i = 0; i < items.length; ++i) {
-  //   // do something with items[i], which is a <li> element
-  // }
-
-  // function myFunction() {
-  //   var x = document.getElementById("myCheck").checked;
-  //   document.getElementById("demo").innerHTML = x;
-  //   if (x === true) {
-  //     var y = document.getElementById("myCheck").value;
-  //     document.getElementById("demo").innerHTML = y;
-  //   }
-  // }
+  function enableSaveToFavoritesButton() {
+    var button = document.createElement('button');
+    button.innerHTML = 'Save To Favorites';
+    button.className = 'button';
+    button.onclick = function() {
+      saveToFavorites();
+    }
+    document.getElementById('img').append(button);
+  }
 
 
+  // form submit
+  $(".submit").on('click', function(event) {
+    event.preventDefault();
+    collectNavData();
+  });
 
-  // });
-  </script>
-</head>
 
-<body>
-  <button onclick="doIt()">Run the request</button>
-  <div id="output">The API request is:</div>
-  <div id="title"></div>
-  <div id="img"></div>
-  <div id="instructions"></div>
-  <div id="ingredients"></div>
-  <div id="misc"></div>
-  <button onclick="saveToFavorites()">Save to Favorites</button>
-</body>
 
-</html>
+
+
+  emptyDivs();
+});

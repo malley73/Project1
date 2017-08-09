@@ -31,7 +31,6 @@ body {
    margin: 20px auto 20px auto;
    max-width: initial;
    height:auto;
-
 }
 
 #groceryButton {
@@ -41,18 +40,11 @@ body {
     padding: 10px;
 }
 
-
-
-
-
-
-
 .grid:after {
     content: '';
     display: block;
     clear: both;
 }
-
 
 /* ---- .grid-item ---- */
 
@@ -76,8 +68,6 @@ body {
     margin: 0 auto;
 }
  
-
- 
 @media only screen and (max-width : 399px),
 only screen and (max-device-width : 399px){
   .grid-item{
@@ -85,8 +75,3 @@ only screen and (max-device-width : 399px){
   }
 
 }
-
-
-
-
-

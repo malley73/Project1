@@ -1,73 +1,77 @@
-.brandimg{
-margin-top: 20px;
-max-width:150px;
-max-height:91px;
+.brandimg {
+  margin-top: 20px;
+  max-width: 150px;
+  max-height: 91px;
 }
-.navItem{
+
+.navItem {
   list-style: none;
   margin-left: 5px;
   font-family: gill sans;
 }
-.item{
-	margin-left:15px;
+
+.item {
+  margin-left: 15px;
 }
+
 a.title,
 a.textInput,
 .submit,
-.favorites
-{
-	margin-top: 65px;
-	color: #76002e;
-}
-#responsive-menu, 
-li{
-	list-style: none;
-	background-color: #ffffff;
+.favorites {
+  margin-top: 65px;
+  color: #76002e;
 }
 
-.top-bar-left{
-	margin-left: 20px;
+#responsive-menu,
+li.navItem {
+  /*increased li specificity was preventing ol from showing numbers mja*/
+  list-style: none;
+  background-color: #ffffff;
 }
 
-.submit{
-	margin-left: 10px;
-	background-color: #ffffff;
-	border: none;
+.top-bar-left {
+  margin-left: 20px;
 }
 
-.favorites{
-	margin-left: 89px;
+.submit {
+  margin-left: 10px;
+  background-color: #ffffff;
+  border: none;
+}
+
+.favorites {
+  margin-left: 89px;
 }
 
 /*Media Query 1*/
 /*/* Small only */
 
 @media screen and (max-width: 639px) {
-#responsive-menu{
-max-width:700px;
-}
+  #responsive-menu {
+    max-width: 700px;
+  }
 
-.brandimg{
-margin-top: 20px;
-margin-left: 10px;
-max-width: 150px;
-max-height: 91px;
-clear:both;
-display: block;
-}
-a.title{
-font-size: 20px;
-margin-top: 10px;
-}	
+  .brandimg {
+    margin-top: 20px;
+    margin-left: 10px;
+    max-width: 150px;
+    max-height: 91px;
+    clear: both;
+    display: block;
+  }
 
-a.textInput,
-.submit,
-.favorites
-{
-margin-top: 10px;
-font-size: 20px;
-}
-.favorites{
-margin-left:0px;
-}
+  a.title {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  a.textInput,
+  .submit,
+  .favorites {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+  .favorites {
+    margin-left: 0px;
+  }
 }
