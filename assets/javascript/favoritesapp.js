@@ -17,17 +17,14 @@ $(document).ready(function() {
 
   function retrieveFavorite() {
     x = 0;
-    console.log(x);
     database = firebaseInit();
     database.ref().on("child_added", function(childSnapshot, prevChildKey) {
-      console.log(childSnapshot);
       parseFavData(childSnapshot);
     });
   }
 
   function parseFavData(childSnapshot) {
     x++;
-    console.log(x);
     var id = childSnapshot.val().id;
     var title = childSnapshot.val().title;
     var image = childSnapshot.val().image;
@@ -39,7 +36,6 @@ $(document).ready(function() {
     $("#name" + count).html(title);
     $("#thumbnail" + count).attr("src", image);
     $('#recipeID' + count).data('recipeID', id);
-    console.log($("#recipeID" + count).data("recipeID"));
   }
 
   //button listener
@@ -49,7 +45,6 @@ $(document).ready(function() {
       bns[i].addEventListener("click", function() {
         var btnNum = $(this).attr("id");
         var divIDNum = parseInt(btnNum.slice(3));
-        console.log(divIDNum);
         getRecipeID(divIDNum);
       });
     }
@@ -57,7 +52,6 @@ $(document).ready(function() {
 
   function getRecipeID(divIDNum) {
     var recipeID = $("#recipeID" + divIDNum).data("recipeID");
-    console.log(recipeID);
     getRecipe(recipeID, divIDNum);
   }
 
@@ -68,7 +62,6 @@ $(document).ready(function() {
       data: {}, // Additional parameters here
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         prepareOutputToPage(data, divIDNum);
       },
       error: function(err) { alert(err); },
@@ -103,7 +96,6 @@ $(document).ready(function() {
   }
 
   function parseInstructions(instructions, divIDNum) {
-    console.log(instructions);
     var instOutput = "";
     if (instructions != null) {
       if (instructions.indexOf("<ol>") === -1) { //if not already an ordered list
@@ -134,7 +126,6 @@ $(document).ready(function() {
       instOutput = "<p>Instructions not available</p>";
     }
     instOutput = instOutput + "<p>Note: Recipes are pulled from a user maintained database. This site is not responsible for grammatical errors or inconsistencies.</p>"
-    console.log(instOutput);
     outputToPage(instOutput, "instructions" + divIDNum);
   }
 

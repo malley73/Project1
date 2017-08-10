@@ -7,9 +7,6 @@ $(document).ready(function() {
     $("#misc").empty();
   }
 
-  // project1.js
-  console.log("this loaded");
-
   function firebaseInit() {
     var config = {
       apiKey: "AIzaSyD3J6w3EM4cTgZC88Wf9HWQvO1sjTNLGwQ",
@@ -25,14 +22,11 @@ $(document).ready(function() {
     return database;
   }
 
-
   function saveToFavorites() {
     savid = localStorage.getItem("id");
     savtitle = localStorage.getItem("title");
     savimage = localStorage.getItem("image");
-    console.log(savid + " " + savtitle + " " + savimage);
     database = firebaseInit();
-    console.log(database);
     var favorite = {
       id: savid,
       title: savtitle,
@@ -42,29 +36,23 @@ $(document).ready(function() {
   }
 
   function collectNavData() {
-    console.log("begin collectNavData");
     var exclusionArray = [];
     var mealDietArray = [];
     var childCheckBoxes = $("ul.check ul li input[type='checkbox']");
     var childRadioSelect = $("ul.check ul li input[type='radio']");
     var id;
-    console.log(childCheckBoxes);
     for (i = 0; i < childCheckBoxes.length; i++) {
       id = childCheckBoxes[i].id;
-      console.log(document.getElementById(id).checked);
       if (document.getElementById(id).checked === true) {
         exclusionArray.push(childCheckBoxes[i].id);
       }
     }
     for (i = 0; i < childRadioSelect.length; i++) {
       id = childRadioSelect[i].id;
-      console.log(document.getElementById(id).checked);
       if (document.getElementById(id).checked === true) {
         mealDietArray.push(childRadioSelect[i].id);
       }
     }
-    console.log(exclusionArray);
-    console.log(mealDietArray);
     uncheckAll();
     parseDataforAPI(exclusionArray, mealDietArray);
     //var text = $('#menu_selected').text();
@@ -74,7 +62,8 @@ $(document).ready(function() {
     var childCheckBoxes = $("ul.check ul li input[type='checkbox']");
     var childRadioSelect = $("ul.check ul li input[type='radio']");
     var id;
-    console.log(childCheckBoxes);
+    // clear intro
+    $("#intro").empty();
     for (i = 0; i < childCheckBoxes.length; i++) {
       id = childCheckBoxes[i].id;
       document.getElementById(id).checked = false;
@@ -102,10 +91,8 @@ $(document).ready(function() {
     }
     if (diet === undefined) { diet = ""; }
     if (exclusionList === undefined) { exclusionList = ""; }
-    console.log(mealId + " " + diet + " " + exclusionList);
     getMeals(mealId, diet, exclusionList);
   }
-
 
   function getMeals(meal, diet, exclusions) { // meal Time = breakfast[0],  lunch[1], or dinner[2]
     var output0 = $.ajax({
@@ -115,7 +102,6 @@ $(document).ready(function() {
       data: {}, // Additional parameters here
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         var recipeID = String(data.meals[meal].id); //array selection from Nav
         getRecipe(recipeID);
       },
@@ -133,7 +119,6 @@ $(document).ready(function() {
       data: {}, // Additional parameters here
       dataType: 'json',
       success: function(data) {
-        console.log(data);
         prepareOutputToPage(data);
       },
       error: function(err) { alert(err); },
@@ -182,7 +167,6 @@ $(document).ready(function() {
   }
 
   function parseInstructions(instructions) {
-    console.log(instructions);
     var instOutput = "";
     if (instructions != null) {
       if (instructions.indexOf("<ol>") === -1) { //if not already an ordered list
@@ -213,7 +197,6 @@ $(document).ready(function() {
       instOutput = "<p>Instructions not available</p>";
     }
     instOutput = instOutput + "<p>Note: Recipes are pulled from a user maintained database. This site is not responsible for grammatical errors or inconsistencies.</p>"
-    console.log(instOutput);
     outputToPage(instOutput, "instructions");
   }
 
@@ -242,8 +225,6 @@ $(document).ready(function() {
     savid = localStorage.getItem("id");
     savtitle = localStorage.getItem("title");
     savimage = localStorage.getItem("image");
-    console.log(savid + " " + savtitle + " " + savimage);
-    console.log(database);
     var favorite = {
       id: savid,
       title: savtitle,
@@ -262,16 +243,11 @@ $(document).ready(function() {
     document.getElementById('img').append(button);
   }
 
-
   // form submit
   $(".submit").on('click', function(event) {
     event.preventDefault();
     collectNavData();
   });
-
-
-
-
 
   emptyDivs();
 });

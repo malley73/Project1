@@ -2,9 +2,7 @@
     box-sizing: border-box;
 }
 
-
 /* force scrollbar */
-
 html {
     overflow-y: scroll;
 }
@@ -12,8 +10,13 @@ html {
 body {
     font-family: sans-serif;
 }
+
+#home-page{
+  background: #fff;
+}
+
 .grid-item {
-    padding: 10px;
+    padding: 5px;
 }
 
 .grid {
@@ -31,23 +34,10 @@ body {
    margin: 20px auto 20px auto;
    max-width: initial;
    height:auto;
-}
-
-#groceryButton {
-    background: #4cc355;
-    color: #fff;
-    border-radius: 10px;
-    padding: 10px;
-}
-
-.grid:after {
-    content: '';
-    display: block;
-    clear: both;
+   background: #fff;
 }
 
 /* ---- .grid-item ---- */
-
 .grid-sizer,
 .grid-item {
     width: 33.333%;
@@ -64,12 +54,35 @@ body {
 
 
 #container {
-    width: 1200px;
+    width: 100%;
     margin: 0 auto;
 }
- 
-@media only screen and (max-width : 399px),
-only screen and (max-device-width : 399px){
+
+.intro{
+  position: relative;
+}
+
+.intro .intro-title{
+  position:absolute;
+  padding:20px;
+  bottom:200px;
+  color:#fff;
+  font-family: sans-serif;
+  font-weight: 600;
+  line-height: 50px;
+  font-size: 50px;
+}
+
+.intro .intro-content{
+  position: absolute;
+  padding:20px;
+  bottom: 50px;
+  color:#fff;
+  font-weight: 600;
+}
+
+@media only screen and (max-width : 480px),
+only screen and (max-device-width : 480px){
   .grid-item{
     width:100%;
   }
