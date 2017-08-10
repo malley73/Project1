@@ -58,33 +58,82 @@ body {
     margin: 0 auto;
 }
 
-.intro{
+.intro {
   position: relative;
+  width: 100%;
 }
 
-.intro .intro-title{
-  position:absolute;
-  padding:20px;
-  bottom:200px;
-  color:#fff;
+.intro .intro-title {
+  position: absolute;
+  padding: 20px;
+  bottom: 200px;
+  color: #fff;
   font-family: sans-serif;
   font-weight: 600;
   line-height: 50px;
   font-size: 50px;
 }
 
-.intro .intro-content{
+.intro .intro-content {
   position: absolute;
-  padding:20px;
+  padding: 20px;
   bottom: 50px;
-  color:#fff;
+  color: #fff;
   font-weight: 600;
 }
 
-@media only screen and (max-width : 480px),
-only screen and (max-device-width : 480px){
-  .grid-item{
-    width:100%;
+.columns {
+  padding: 0;
+}
+
+@media only screen and (max-width: 480px),
+only screen and (max-device-width: 480px) {
+  .grid-item {
+    width: 100%;
   }
 
+  .intro .intro-title {
+    position: absolute;
+    padding: 10px;
+    bottom: 30px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 600;
+    line-height: 16px;
+    font-size: 16px;
+  }
+
+  .intro .intro-content {
+    position: absolute;
+    padding: 10px;
+    bottom: 0;
+    color: #fff;
+    font-weight: 600;
+    font-size: 10px;
+  }
+}
+
+@media only screen and(max-width:1024px),
+(min-width: 481px),
+only screen and(max-device-width:1024px),
+(min-device-width: 481px) {
+  .intro .intro-title {
+    position: absolute;
+    padding: 20px;
+    bottom: 85px;
+    color: #fff;
+    font-family: sans-serif;
+    font-weight: 600;
+    line-height: 40px;
+    font-size: 40px;
+  }
+
+  .intro .intro-content {
+    position: absolute;
+    padding: 20px;
+    bottom: 15px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 18px;
+  }
 }
