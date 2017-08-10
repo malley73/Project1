@@ -7,34 +7,6 @@ $(document).ready(function() {
     $("#misc").empty();
   }
 
-  function firebaseInit() {
-    var config = {
-      apiKey: "AIzaSyD3J6w3EM4cTgZC88Wf9HWQvO1sjTNLGwQ",
-      authDomain: "project1-fav-meals.firebaseapp.com",
-      databaseURL: "https://project1-fav-meals.firebaseio.com",
-      projectId: "project1-fav-meals",
-      storageBucket: "",
-      messagingSenderId: "809946328601"
-    };
-    firebase.initializeApp(config);
-
-    var database = firebase.database();
-    return database;
-  }
-
-  function saveToFavorites() {
-    savid = localStorage.getItem("id");
-    savtitle = localStorage.getItem("title");
-    savimage = localStorage.getItem("image");
-    database = firebaseInit();
-    var favorite = {
-      id: savid,
-      title: savtitle,
-      image: savimage
-    };
-    database.ref().push(favorite);
-  }
-
   function collectNavData() {
     var exclusionArray = [];
     var mealDietArray = [];
@@ -135,6 +107,7 @@ $(document).ready(function() {
     var servings = data.servings;
     var id = data.id;
     //local storage for favorites
+    //could have also stored this in the Dom usig .data
     localStorage.setItem("id", id);
     localStorage.setItem("title", title);
     localStorage.setItem("image", image);
