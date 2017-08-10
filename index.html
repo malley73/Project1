@@ -2,173 +2,161 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Project1</title>
-    <!--Foundation CSS-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
-    <!--Custom css-->
-    <link rel="stylesheet" href="assets/css/project1.css">
-    <link rel="stylesheet" href="assets/css/nav.css">
+  <meta charset="UTF-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Full Stack Meals</title>
+  <!--Foundation CSS-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/css/foundation.min.css">
+  <!--Custom css-->
+  <link rel="stylesheet" href="assets/css/project1.css">
+  <link rel="stylesheet" href="assets/css/nav.css">
+  <!--jquery JS-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <!--Foundation JS-->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/foundation/6.2.4/js/foundation.reveal.js"></script>
+  <!--Masonry GridPlugin JS-->
+  <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
+  <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.2.0/firebase.js"></script>
+  <script type="text/javascript" src="assets/javascript/project1.js"></script>
 </head>
 
 <body>
-
-<ul class="vertical medium-horizontal menu" data-responsive-menu="accordion medium-dropdown">
-<li class="navLogo">
-            <a href="index.html" class="logo"><img class="brandimg" src="assets/images/fullStackLogo.png"></a>
-            </li>
-  <li class="navItem">
-    <a href="#" class="title">Meal Type</a>
-    <ul class="vertical menu mealtype">
-          <li class="item"><input type="checkbox">Breakfast</li>
-          <li class="item"><input type="checkbox">Lunch</li>
-          <li class="item"><input type="checkbox">Dinner</li>
-        </ul>
-  </li>
-
-  <li class="navItem">
-    <a href="#" class="title">Food Genre</a>
-    <ul class="vertical menu mealgenre">
-      <li class="item"><input type="checkbox" value="indian">Indian</li>
-      <li class="item"><input type="checkbox" value="italian">Italian</li>
-      <li class="item"><input type="checkbox" value="greek">Greek</li>
-      <li class="item"><input type="checkbox" value="thai">Thai</li>
-      <li class="item"><input type="checkbox" value="mexican">Mexican</li>
-      <li class="item"><input type="checkbox" value="korean">Korean</li>
-      <li class="item"><input type="checkbox" value="japanese">Japanese</li>
-    </ul>
-  </li>
-  <li class="navItem">
-    <a href="#" class="title">Allergans</a>
-    <ul class="vertical menu allergans">
-      <li class="item"><input type="checkbox" value="nuts">Nuts</li>
-      <li class="item"><input type="checkbox" value="fish">Fish</li>
-      <li class="item"><input type="checkbox" value="shelfish">Shelfish</li>
-      <li class="item"><input type="checkbox" value="milk">Milk</li>
-      <li class="item"><input type="checkbox" value="eggs">Eggs</li>
-      <li class="item"><input type="checkbox" value="soy">Soy</li>
-      <li class="item"><input type="checkbox" value="wheat&gluten">Wheat & Gluten</li>
-    </ul>
-  </li>
-   <li class="navItem">
-    <a href="#" class="title">Dietary Needs</a>
-    <ul class="vertical menu dietaryneeds">
-      <li class="item"><input type="checkbox" value="vegetarian"> Vegetarian</li>
-      <li class="item"><input type="checkbox" value="glutenfree">Gluten-Free</li>
-      <li class="item"><input type="checkbox" value="ketogenic">Ketogenic</li>
-      <li class="item"><input type="checkbox" value="lowfodmap">Low FODMAP</li>
-      <li class="item"><input type="checkbox" value="sustainable">Sustainable</li>
-      <li class="item"><input type="checkbox" value="vegan">Vegan</li>
-      <li class="item"><input type="checkbox" value="healthy">Healthy</li>
-      <li class="item"><input type="checkbox" value="thewhole30">The Whole30</li>
-    </ul>
-  </li>
-  <li class="navItem">
-      <a href="#" class="textInput">Keywords</a>
-      <ul class="textinput">
-        <li><input type="search" placeholder="Search"></li>
-        <li><button type="button" class="button">Search</button></li>
+  <ul class="vertical medium-horizontal menu check" data-responsive-menu="accordion medium-dropdown" data-close-on-click-inside="false">
+    <li class="navLogo">
+      <a href="index.html" class="logo"><img class="brandimg" src="assets/images/fullStackLogo.png"></a>
+    </li>
+    <li class="navItem">
+      <a href="#" class="title">Meal Type</a>
+      <ul class="vertical menu mealtype">
+        <li class="item">
+          <input type="radio" name="meal" id="breakfast"> Breakfast</li>
+        <li class="item">
+          <input type="radio" name="meal" id="lunch" checked="true"> Lunch</li>
+        <li class="item">
+          <input type="radio" name="meal" id="dinner"> Dinner</li>
       </ul>
-  </li>
-  <li class="navItem">
+    </li>
+    <li class="navItem">
+      <a href="#" class="title">Allergens</a>
+      <ul class="vertical menu allergens">
+        <li class="item">
+          <input type="checkbox" id="nuts"> Nuts</li>
+        <li class="item">
+          <input type="checkbox" id="fish"> Fish</li>
+        <li class="item">
+          <input type="checkbox" id="shellfish"> Shellfish</li>
+        <li class="item">
+          <input type="checkbox" id="milk"> Milk</li>
+        <li class="item">
+          <input type="checkbox" id="eggs"> Eggs</li>
+        <li class="item">
+          <input type="checkbox" id="soy"> Soy</li>
+        <li class="item">
+          <input type="checkbox" id="gluten%2Cwheat"> Wheat &amp; Gluten</li>
+      </ul>
+    </li>
+    <li class="navItem">
+      <a href="#" class="title">Dietary Needs</a>
+      <ul class="vertical menu dietaryneeds">
+        <li class="item">
+          <input type="radio" name="diet" id="vegetarian"> Vegetarian</li>
+        <li class="item">
+          <input type="radio" name="diet" id="gluten+free"> Gluten-Free</li>
+        <li class="item">
+          <input type="radio" name="diet" id="ketogenic"> Ketogenic</li>
+        <li class="item">
+          <input type="radio" name="diet" id="fodmap+friendly"> Low FODMAP</li>
+        <li class="item">
+          <input type="radio" name="diet" id="sustainable"> Sustainable</li>
+        <li class="item">
+          <input type="radio" name="diet" id="vegan"> Vegan</li>
+        <li class="item">
+          <input type="radio" name="diet" id="healthy"> Healthy</li>
+        <li class="item">
+          <input type="radio" name="diet" id="whole+30"> The Whole30</li>
+      </ul>
+    </li>
+    <li class="navItem">
       <input class="submit" type="submit" value="Submit">
-  </li>
-  <li class="navItem">
-      <a href="#" class="favorites" value="Favorites">Favorites</a>
-  </li>
-</ul>
-
-    <div class="container">
-        <div class="row fullWidth">
-            <div class="large-6 columns">
-                <img class="recipeImage" src="http://placehold.it/500x500&amp;text=Image">
-                <br>
-            </div>
-            <div class="large-6 columns">
-                <h3 class="recipeTitle">Title<hr></h3>
-                <div class="panel">
-                    <h4 class="subHeader">Sub header<hr></h4>
-                    <h5 class="instructions">Fusce ullamcorper mauris in eros dignissim molestie posuere felis blandit. Aliquam erat volutpat. Mauris ultricies posuere vehicula. Sed sit amet posuere erat. Quisque in ipsum non augue euismod dapibus non et eros. Pellentesque consectetur tempus mi iaculis bibendum. Ut vel dolor sed eros tincidunt volutpat ac eget leo.</h5>
-                </div>
-                <div class="ingredientList">Ingredient List</div>
-                <a href="#" class="addGrocery">Add To Grocery List</a>
-                <a href="#" class="saveRecipe">Add To Favorites</a>
-            </div>
+    </li>
+    <li class="navItem">
+      <a href="favorities.html" class="favorites" value="Favorites">Favorites</a>
+    </li>
+  </ul>
+  <div class="container" id="home-page">
+    <div class="row">
+      <div class="large-12 columns">
+        <div class="intro" id="intro">
+          <img src="assets/images/markus-spiske-139525.jpg">
+          <h2 class="intro-title">BECOME THE CHEF <br> YOU WANT TO BE</h2>
+          <h4 class="intro-content">All Of Your Favorite Recipes At The Click Of A Button</h4>
         </div>
-        <!--Modal Reveal-->
-        <div class="reveal" id="imageModal" data-reveal data-animation-in="fade">
-            <!--Element Title-->
-            <h1 class="recipeTitle">Title</h1>
-            <!--Image Element-->
-            <img class="recipeImage" src="#" />
-            <p class="subTitle">Sub title</p>
-            <div class="instructions">Instructions</div>
-            <div class="ingredientList">Ingredient List</div>
-            <div class="extraInfo">Extra</div>
-            <a href="#" class="addGrocery">Grocery</a>
-            <a href="#" class="saveRecipe">Recipe</a>
-            <button class=" close-button" data-close aria-label="Close modal" type="button">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        <!--Masonry-->
-        <div class="grid">
-            <div class="grid-sizer"></div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://www.rand-img.com/450/300/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/251/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/400/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/452/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/250/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://www.rand-img.com/450/400/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/551/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://www.rand-img.com/450/350/food" />
-            </div>
-            <div class="grid-item">
-                <img data-open="imageModal" src="http://lorempixel.com/450/300/food" />
-            </div>
-        </div>
+      </div>
     </div>
+    <div class="row fullWidth">
+      <div class="large-6 columns" id="img">
+        <img class="recipeImage" src="http://placehold.it/500x500&amp;text=Image">
+        <br>
+      </div>
+      <div class="large-6 columns">
+        <div id="title">
+          <h3 class="recipeTitle">Title<hr></h3>
+        </div>
+        <div id="instructions">
+          <!-- <h4 class="subHeader">Sub header<hr></h4> -->
+          <h5 class="instructionText">Fusce ullamcorper mauris in eros dignissim molestie posuere felis blandit. Aliquam erat volutpat. Mauris ultricies posuere vehicula. Sed sit amet posuere erat. Quisque in ipsum non augue euismod dapibus non et eros. Pellentesque consectetur tempus mi iaculis bibendum. Ut vel dolor sed eros tincidunt volutpat ac eget leo.</h5>
+        </div>
+        <div id="ingredientList"></div>
+        <div id="misc"></div>
+      </div>
     </div>
-    <!--jquery JS-->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <!--Foundation JS-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.3.0/js/foundation.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/foundation/6.2.4/js/foundation.reveal.js"></script>
-    <!--Masonry GridPlugin JS-->
-    <script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
-    <script src="https://unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
-    <script>
-    $(document).foundation();
-
-    var grid = document.querySelector('.grid');
-    var msnry;
-
-    imagesLoaded(grid, function() {
-        // init Isotope after all images have loaded
-        msnry = new Masonry(grid, {
-            itemSelector: '.grid-item',
-            columnWidth: '.grid-sizer',
-            percentPosition: true
-        });
+    <div class="grid">
+      <div class="grid-sizer"></div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://www.rand-img.com/450/300/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/251/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/400/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/452/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/250/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://www.rand-img.com/450/400/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/551/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://www.rand-img.com/450/350/food" />
+      </div>
+      <div class="grid-item">
+        <img data-open="imageModal" src="http://lorempixel.com/450/300/food" />
+      </div>
+    </div>
+  </div>
+  <script>
+  $(document).foundation();
+  var grid = document.querySelector('.grid');
+  var msnry;
+  imagesLoaded(grid, function() {
+    // init Isotope after all images have loaded
+    msnry = new Masonry(grid, {
+      itemSelector: '.grid-item',
+      columnWidth: '.grid-sizer',
+      percentPosition: true
     });
-    </script>
+  });
+  </script>
 </body>
 
 </html>
